@@ -1,0 +1,25 @@
+.align
+{
+    text-align: center;
+}
+.img-responsive
+{
+    width: 100%;
+}
+.thumbnail .caption-full
+{
+    padding: 9px;
+}
+.thumbnail
+{
+    padding: 0;
+}
+.deleteForm
+{
+    display: inline;
+    margin-left: 10px;
+}
+.thumbnail>img,.img-responsive
+{
+    min-height: 250px;
+}

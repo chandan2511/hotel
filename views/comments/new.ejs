@@ -1,0 +1,23 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 style="text-align: center">Add New Comment to <%= hotel.name %></h1>
+    <div class="row">
+        <div style="width: 30%; margin: 20px auto;">
+            <div class="buttons">
+                <a href="/hotels/<%= hotel._id %>" class="btn btn-primary">Back to <%= hotel.name %></a>
+                <a href="/hotels/" class="btn btn-success">All Hotels</a>
+                <br />
+            </div>
+             <br /> <br />
+             <!-- Group variables TOGETHER by putting them into comment[something] -->
+            <form action="/hotels/<%= hotel._id %>/comments" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="comment[text]" placeholder="Text"></input>
+                </div>
+                <button class="btn btn-primary btn-block" type="submit">Add New Comment!</button>
+            </form>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>

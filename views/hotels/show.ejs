@@ -1,0 +1,65 @@
+<% include ../partials/header %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-sm-12 col-md-offset-1">
+                <div class="thumbnail">
+                    <img src="<%= hotel.image %>" onerror="this.onerror=null;this.src='/<%= hotel.image %>';" class="img-responsive" />
+                    <div class="caption-full">
+                        <% if (hotel.price) { %>
+                            <h4 class="pull-right"> Price: $
+                                <%= hotel.price %>/night </h4>
+                            <% } %>
+                                <h4>
+                                    <a>
+                                        <%= hotel.name %>
+                                    </a>
+                                </h4>
+                                <% if (hotel.description) { %>
+                                    <p>
+                                        <%= hotel.description %>
+                                    </p>
+                                    <% } %>
+                                        <p> Submitted By: <strong><%= hotel.user.username %>  </strong></p>
+                                        <% if(currentUser && hotel.user.id && hotel.user.id.equals(currentUser._id)) { %>
+                                            <a href="/hotels/<%= hotel.id %>/edit/" class="btn btn-warning">Edit</a>
+                                            <!-- Override delete method with _method=DELETE -->
+                                            <form class="deleteForm" action="/hotels/<%= hotel.id %>?_method=DELETE" method="POST">
+                                                <button class="btn btn-danger">Delete</button>
+                                            </form>
+                                            <% } %>
+
+                    </div>
+                </div>
+                <div class="well">
+                    <div class="text-right">
+                        <a href="/hotels/<%= hotel._id %>/comments/new/" class="btn btn-success">Add New Comment</a>
+                        <a href="/hotels" class="btn btn-primary">All Hotels</a>
+                    </div>
+                    <hr>
+                    <% hotel.comments.forEach(function(comment) { %>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <strong> <%= comment.author.username %> </strong>
+                                <p>
+                                    <%= comment.text  %>
+                                </p>
+                                <% if(currentUser && comment.author.username==currentUser.username) { %>
+                                    <a class="btn btn-xs btn-warning" 
+                                    href="/hotels/<%= hotel._id %>/comments/<%= comment._id %>/edit">
+                                    Edit</a>
+                                    <form  class="deleteForm" action="/hotels/<%= hotel._id %>/comments/<%= comment._id %>?_method=DELETE" method="post">
+                                        <input type="submit" class="btn btn-danger btn-xs" value="Delete!">
+                                    </form>
+                                    <% } %>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <% include ../partials/footer %>
